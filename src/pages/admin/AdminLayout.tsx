@@ -1,29 +1,81 @@
-import { Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
+import { Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import Campaigns from './Campaigns/Campaigns';
-
-import User from './Users/User';
-import styles from './Campaigns/Campaigns.module.scss';
+import Users from './Users/User';
 import MyComponent from './MyComponent';
-import {Orders} from "./Orders/Orders";
+import Orders from './Orders/Orders';
+
+import HomeIcon from '@mui/icons-material/Home';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import PersonIcon from '@mui/icons-material/Person';
+import ExtensionIcon from '@mui/icons-material/Extension';
+import { Tooltip } from '@mui/material';
 
 export function AdminLayout() {
+    const drawerWidth = 50;
+    const location = useLocation();
+
     return (
         <>
-            <div className={styles.header}>My Custom Admin Panel</div>
-            <div className="container admin-main">
+            <Drawer
+                variant="permanent"
+                sx={{
+                    width: drawerWidth,
+                    flexShrink: 0,
+                    [`& .MuiDrawer-paper`]: {
+                        width: drawerWidth,
+                        boxSizing: 'border-box',
+                        direction: 'rtl',
+                    },
+                }}
+            >
+                <List>
+                    <ListItem button component={Link} to="/admin/campaigns">
+                        <Tooltip title="Campaigns" placement="right">
+                            <ListItemIcon>
+                                <HomeIcon />
+                            </ListItemIcon>
+                        </Tooltip>
+                        <ListItemText primary="Campaigns" />
+                    </ListItem>
+                    <ListItem button component={Link} to="/admin/orders">
+                        <Tooltip title="Orders" placement="right">
+                            <ListItemIcon>
+                                <ShoppingCartIcon />
+                            </ListItemIcon>
+                        </Tooltip>
+                        <ListItemText primary="Orders" />
+                    </ListItem>
+                    <ListItem button component={Link} to="/admin/users">
+                        <Tooltip title="Users" placement="right">
+                            <ListItemIcon>
+                                <PersonIcon />
+                            </ListItemIcon>
+                        </Tooltip>
+                        <ListItemText primary="Users" />
+                    </ListItem>
+                    <ListItem button component={Link} to="/admin/mycomponent">
+                        <Tooltip title="My Component" placement="right">
+                            <ListItemIcon>
+                                <ExtensionIcon />
+                            </ListItemIcon>
+                        </Tooltip>
+                        <ListItemText primary="My Component" />
+                    </ListItem>
+                </List>
+            </Drawer>
+            <div style={{ marginLeft: drawerWidth }}>
                 <Routes>
-                    <Route path="/" element={<Campaigns />} />
-                    <Route path="campaigns" element={<Campaigns />} />
-                    <Route path="orders" element={<Orders />} />
-                    <Route path="mycomponent" element={<MyComponent />} />
-                    <Route path="users" element={<User />} />
-                    <Route path="users/:id" element={<User />} />
+                    <Route path="/admin/campaigns" element={<Campaigns />} />
+                    <Route path="/admin/orders" element={<Orders />} />
+                    <Route path="/admin/users" element={<Users />} />
+                    <Route path="/admin/mycomponent" element={<MyComponent />} />
                 </Routes>
             </div>
-            <div className={styles.footer}>&copy; {new Date().getFullYear()} - My Company</div>
         </>
     );
 }
 
+export default AdminLayout;
 
-export default MyComponent;

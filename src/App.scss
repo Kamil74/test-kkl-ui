@@ -11,12 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
   monospace;
 }
+.drawer {
+  width: 240px;
+}
+.drawer-text {
+  opacity: 0.6;
+  transition: opacity 0.5s;
+}
 
 .container {
+  display: flex;
+  flex-direction: row-reverse;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
+
 
 .admin-header,
 .admin-footer {
@@ -26,6 +36,7 @@ code {
 }
 
 .admin-main {
+  flex-grow: 1;
   min-height: calc(100vh - 60px);
 }
 

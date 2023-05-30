@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CampaignDetails from './CampaignDetails';
+
+
 import {
     Paper,
     Table,
@@ -28,16 +30,18 @@ interface Campaign {
 }
 
 function Campaigns() {
+
     const [filters, setFilters] = useState({
         type: '',
         page: 1,
         pageSize: 10,
         search: '',
     });
-
     const [data, setData] = useState<Campaign[]>([]);
+    const [selectedCampaignId, setSelectedCampaignId] = useState<string | number | null>(null);
 
-    const [selectedCampaignId, setSelectedCampaignId] = useState(null);
+
+
 
     // Fetch data based on filters
     useEffect(() => {
@@ -65,6 +69,7 @@ function Campaigns() {
 
     return (
         <div>
+            <h1>Campaigns</h1>
             {/* Filter by campaign type */}
             <FormControl>
                 <InputLabel>Type</InputLabel>
@@ -140,7 +145,8 @@ function Campaigns() {
             </TableContainer>
 
             {/* Campaign details */}
-            {selectedCampaignId && <CampaignDetails campaignId={selectedCampaignId} />}
+
+
         </div>
     );
 }
