@@ -1,7 +1,7 @@
 import {RoleTypes} from "../shared/models";
 import * as Fa from '@fortawesome/free-solid-svg-icons';
 
-export type RouteNames = 'campaigns' | 'orders'
+export type RouteNames = 'campaigns' | 'orders' | 'user'
 
 export interface Routing {
     name: RouteNames;
@@ -35,6 +35,16 @@ const routing: Routing[] = [
         ],
         disabled: false,
     },
+    {
+        name: 'user',
+        path: '/user',
+        apiUrl:'user',
+        title: 'משתמשים',
+        icon: Fa.faReceipt,
+        roles: [
+        ],
+        disabled: false,
+    },
 ];
 
 const routes: { [key in RouteNames]: Routing } = {} as any;
@@ -45,8 +55,10 @@ routing.forEach((route) => {
 export const defaultPaths = {
     [RoleTypes.Admin]: 'orders',
     [RoleTypes.Admin]: 'campaigns',
+    [RoleTypes.Admin]: 'user',
     [RoleTypes.Regular]: 'orders',
     [RoleTypes.Regular]: 'campaigns',
+    [RoleTypes.Regular]: 'user',
 } as  {[key in RoleTypes]: RouteNames };
 
 export {routes, routing};
